@@ -1,0 +1,717 @@
+<style>
+/* RESET (Optional Minimal Reset) */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* VARIABLES (You can customize) */
+:root {
+  --primary-color: #56789A; /* Blue */
+  --dark-bg: white;       /* background */
+  --light-bg: #f9f9f9;
+  --white: #ffffff;
+  --max-width: 1200px;
+  --transition-speed: 0.3s;
+  --nav-height: 70px;
+  --font-main: 'Lato', sans-serif;
+}
+
+/* GLOBAL STYLES */
+body {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  background-color: var(--dark-bg);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 15rem auto;
+  padding: 0 2rem;
+}
+
+/* HEADER / NAVBAR */
+.header {
+  background-color: var(--white);
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+/* NAV */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo img {
+  width: 40px;
+  height: 40px;
+}
+
+.brand-name {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.5rem;
+  color:#56789A;
+}
+
+/* NAV LINKS (Desktop) */
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: black;
+  transition: color var(--transition-speed);
+}
+
+.nav-links li a:hover {
+  color: var(--primary-color);
+}
+
+/* HAMBURGER MENU (Mobile) */
+.hamburger {
+  display: none; /* Hidden on desktop */
+  flex-direction: column;
+  cursor: pointer;
+  gap: 0.3rem;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: black;
+  transition: all var(--transition-speed);
+}
+
+/* HERO SECTION */
+.contact-btn {
+    border: 2px solid black;
+    padding: 8px 15px;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 90vh;
+    background: url('hero.jpg') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.hero-text {
+    position: relative;
+    color: white;
+    z-index: 1;
+}
+
+.hero-text p {
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+.hero-text h1 {
+    font-family: 'Playfair Display';
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.cta2-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: 2px solid #56789A;
+    color: #56789A;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cta-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: 2px solid black;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-primary {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color var(--transition-speed);
+}
+
+.btn-primary:hover {
+  background-color: #d83b4b;
+}
+
+.hero-img {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-img img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ABOUT SECTION */
+.about {
+  border: 2px solid #eee;
+  background-color: #eee;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-text h2 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.about-text p {
+  color: black;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.about-img {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1.6rem;
+}
+
+.about-img img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 1px;
+}
+
+/* CARDS SECTION */
+.cards {
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.cards h2 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+}
+
+.card h3 {
+  text-align: left;
+  margin: 1rem;
+  color: var(--primary-color);
+}
+
+.card p {
+  margin: 0 1rem 1rem 1rem;
+  line-height: 1.2;
+}
+
+.cards-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 50px;
+  max-width: 100%;
+  margin: auto;
+}
+
+.cards-wrapper p {
+  color: black;
+  text-align: left;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 20px;
+}
+
+.blk-btn {
+    background-color: black;
+    color: #f9f9f9;
+    padding: 7px 10px;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.card img {
+  width: 50%;
+  height: auto;
+  aspect-ratio: 5/7;
+  background-color: #ccc;
+}
+
+.alt .text {
+  order: 2;
+}
+
+.alt .img {
+  order: 1;
+}
+
+@media (max-width: 768px) {
+  .card {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .card alt {
+    flex-direction: row-reverse;
+  }
+
+  .text {
+    width: 50%;
+  }
+
+  .card img {
+    width: 50%;
+    height: auto;
+  }
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+/* Why Choose Us SECTION */
+.wcu-section {
+  width: 80%;
+  background-color: #eee;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.wcu-section h2 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.wcu-section p {
+  color: black;
+}
+
+.wcu-list li {
+  color: black;
+}
+.wcu-container {
+  margin-top: 1rem;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.wcu-list {
+ font-family: 'Space Mono', monospace;
+ display: flex;
+ flex-direction: column;
+ max-width: 420px;
+ padding: 32px;
+ margin: 60px auto;
+ border: 1px solid #eee;
+ box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.06);
+}
+
+.wcu-list h1 {
+  color: black;
+}
+
+.contact-section {
+  font-family: var(--font-main);
+  color: black;
+  padding-left: ;
+  margin-bottom: 30px;
+  background: white;
+}
+
+.contact-section h2 {
+   color: var(--primary-color);
+}
+
+.contact-section img {
+   width: 100%;
+   height: 50%;
+}
+
+/* Reviews Section */
+.review blockquote {
+    font-family: var(--font-main);
+    font-size: 21px;
+    color: black;
+    border-left: 5px solid #353535;
+    padding-left: 15px;
+    margin-bottom: 30px;
+    background: white;
+}
+
+.review footer {
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.review h2 {
+ color: var(--primary-color);
+}
+
+.faq-section {
+   color: black;
+   font-family: var(--font-main);
+}
+
+.faq-section h2 {
+ color: black;
+}
+
+/* FOOTER */
+.footer {
+  background-color: #0e141b;
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-logo img {
+  width: 30px;
+  height: 30px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-links li a {
+  color: var(--white);
+  text-decoration: none;
+  transition: color var(--transition-speed);
+}
+
+.footer-links li a:hover {
+  color: var(--primary-color);
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    top: var(--nav-height);
+    right: 0;
+    background-color: var(--dark-bg);
+    width: 50%;
+    height: 100vh;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2rem;
+    transform: translateX(100%);
+    transition: transform var(--transition-speed);
+  }
+
+  .nav-links.show {
+    transform: translateX(0);
+  }
+
+  .hamburger {
+    display: flex; /* Visible on mobile */
+  }
+
+  .hero {
+    flex-direction: column;
+  }
+
+  .about {
+    flex-direction: column;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+</style>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Lato&family=Playfair+Display&display=swap">
+  <title>Nu Perspective</title>
+</head>
+
+<body>
+  <!-- NAVIGATION -->
+  <header class="header">
+    <nav class="navbar container">
+      <!-- Logo (left) -->
+      <div class="logo">
+        <img src="logo.jpg" alt="Logo" />
+        <span class="brand-name">Nu Perspective</span>
+      </div>
+
+      <!-- Hamburger Icon -->
+      <div class="hamburger" id="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+
+      <!-- Nav Links -->
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#cards-section">What we Offer</a></li>
+        <li><a href="https://nuperspectivetherapy@gmail.com" class="contact-btn">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero container" id="hero"> 
+    <div class="overlay"></div>
+    <div class="hero-text">
+        <p>Nu Perspective</p><br>
+        <h1>WELCOME TEXT HERE.</h1>
+        <!-- a href="#contact-section" class="cta2-btn">CONTACT US</a -->
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="about container" id="about">
+    <div class="about-text"><br><br><br>
+      <h2>About Us</h2>
+      <br>
+      <p>
+        At <strong>Nu Perspective</strong>, we are dedicated to enhancing well-being and fostering
+         growth, both individually and collectively. As a team of highly trained and 
+        compassionate psychotherapists, we provide personalized therapy services designed
+         to help you navigate life’s challenges and achieve a healthier, more balanced
+         state of mind. We believe in a holistic approach that honors each person’s unique 
+        journey, integrating evidence-based practices with a deep commitment to your personal
+         growth and well-being.
+      </p>
+      <p>
+        Whether you are seeking support for personal development or looking to elevate your 
+        business strategy, we are here to guide you every step of the way.
+      </p>
+    </div>
+    <div class="about-img">
+      <img src="plants.jpg" alt="Plants" />
+    </div>
+  </section>
+
+  <!-- CARDS SECTION -->
+  <section class="cards container" id="cards-section">
+    <h2>What We Offer:</h2><br>
+    <div class="cards-wrapper">
+      <!-- Card 1 -->
+      <div class="card">
+       <div class= "text">
+        <h3>Individual</h3>
+        <p>
+          One-on-one sessions focused on personal growth and overcoming specific challenges.<br><br>
+          <a href="individuals.html" class="blk-btn">Info</a>
+        </p>
+        </div>
+        <img src="individual.jpg" alt="Individual" />
+      </div>
+
+      <br><br>
+      <!-- Card 2 -->
+      <div class="card alt">
+       <div class= "text">
+        <h3>Couples</h3>
+        <p>
+          Helping partners navigate relationship dynamics, improve communication, and foster deeper connections.<br><br>
+          <a href="couples.html" class="blk-btn">Info</a>
+        </p>
+      </div>
+        <img src="couple.jpg" alt="Couples" />
+      </div>
+
+      <br><br>
+      <!-- Card 3 -->
+      <div class="card">
+       <div class= "text">
+        <h3>Family</h3>
+        <p>
+         Strengthening family bonds and resolving conflicts in a supportive environment.<br><br>
+          <a href="family.html" class="blk-btn">Info</a>
+        </p>
+      </div>
+        <img src="family.jpg" alt="Family" />
+      </div>
+
+      <br><br>
+      <!-- Card 4 -->
+      <div class="card alt">
+       <div class= "text">
+        <h3>Organisation</h3>
+        <p>
+          Consulting services to help businesses improve their culture, communication, and overall effectiveness.<br><br>
+          <a href="organisation.html" class="blk-btn">Info</a>
+        </p>
+      </div>
+        <img src="team.jpg" alt="Organisation" />
+      </div>
+
+    </div>
+  </section>
+  <!-- Why Choose Us SECTION -->
+  <section class="wcu-section container" id="wcu-section">
+    <h2>Why Choose Us?</h2>
+        <ol class="wcu-list">
+        <ul>
+         <li>
+          <h1>Experienced Therapists:</h1>
+          <p>Our team consists of licensed and compassionate therapists, 
+            experienced mentors, and psychologists, who will guide you 
+            through whatever steps you need to take.</p>
+         </li><br><br><br>
+         <li>
+          <h1>Personalized Care:</h1>
+          <p>We prioritize your individual needs, crafting personalized treatment plans 
+            for your unique situation.</p>
+         </li><br><br><br>
+         <li>
+          <h1>Confidentiality:</h1>
+          <p>Your privacy is our utmost priority. We ensure a safe confidential space, and 
+            secure communication throughout your therapy sessions.</p>
+         </li><br><br><br>
+         <li>
+          <h1>Convenient Scheduling:</h1>
+          <p>Flexible appointment times, including evenings and weekends, and teletherapy 
+            options to fit your busy lifestyle.</p>
+         </li><br><br><br>
+         <li>
+          <h1>Data-Driven Insights:</h1>
+          <p>We utilize evidence-based practices and psychological principles for all our services.</p>
+         </li>
+       </ul>
+        </ol>
+  </section>
+  <!-- CONTACT SECTION -->
+  <section class="contact-section container" id="contact-section">
+    <h2>Book a Consultation</h2><br>
+      <img src="consultation.jpg" alt="Consultation" />
+    <br><br>
+    <p>Taking the first step toward change can feel daunting, but you don’t have 
+       do it alone. Schedule a consultation today, and let’s explore how we can
+       support your journey. Reach out to us today and take the first step towards a brighter tomorrow.</p><br><br>
+        <a href="https://appt.link/nu-perspective/consultation" class="cta2-btn">Book a Consultation</a>
+  </section>
+  <br><br><br><br><br>
+  <!-- REVIEW SECTION -->
+  <section class="review container" id="review-section">
+    <h2>What Our Clients Say</h2>
+        <br><br><br>
+        <blockquote>
+            <p>"Example review text here—Highly recommend!" <br> - <strong>[Client Name]</strong></p>
+        </blockquote>
+        <br>
+        <blockquote>
+            <p>"Our family has never communicated better. The guidance we received
+                helped us rebuild trust and strengthen our bond." <br> - <strong>[Client Name]</strong></p>
+        </blockquote>
+    </div>
+  </section>
+  <!-- FAQ SECTION -->
+  <section class="faq-section container" id="faq-section">
+    <h2>Frequently Asked Questions</h2>
+        <br><br>
+    <p><strong>Q: How do I know if therapy is right for me?</strong><br>
+       <strong>A:</strong> Therapy is for anyone seeking clarity, growth, or support. Whether you’re
+        facing specific challenges or just want to improve your well-being, 
+        we provide a safe space to explore and evolve.<br><br><br>
+       <strong>Q: Do you offer virtual sessions?</strong><br>
+       <strong>A:</strong> Yes! We offer both virtual and in-person therapy sessions to accommodate
+        your needs and schedule.<br><br><br>
+       <strong>Q: How do I book a session?</strong><br>
+       <strong>A:</strong> You can book a consultation online through our scheduling system 
+        to find a time that works for you.</p><br>
+        <a href="https://appt.link/nu-perspective/consultation" class="cta2-btn">Book a Consultation</a>
+        <br>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="https://via.placeholder.com/30x30?text=Logo" alt="Logo" />
+        <span>Nu Perspective</span>
+      </div>
+      <p>© 2025 Nu Perspective. All rights reserved.</p><br>
+      <ul class="footer-links">
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="privacy.html">Terms</a></li>
+        <li><a href="https://nuperspectivetherapy@gmail.com">Support</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
