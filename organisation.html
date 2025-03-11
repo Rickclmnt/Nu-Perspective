@@ -7,6 +7,15 @@ body {
     color: #333;
 }
 
+.services-header {
+    width: 100%;
+    height: 30px;
+    background-color: #56789A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 body h1 {
     font-family: 'Playfair Display', serif;
     justify-content: left;
@@ -74,41 +83,7 @@ strong {
     color: #333;
 }
 
-.list-one, .list-two {
-    margin-top: 30px;
-}
-
-.list-one h3, .list-two h3 {
-    font-size: 1.5rem;
-    color: #444;
-    margin-bottom: 20px;
-}
-
-.list-one ul, .list-two ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.list-one li, .list-two li {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-    color: #555;
-}
-
-.list-one li strong {
-    color: #333;
-}
-
 /* CTA Section */
-.cta {
-    margin-top: 40px;
-}
-
-.cta h3 {
-    font-size: 1.5rem;
-    color: #444;
-    margin-bottom: 20px;
-}
 
 .cta-btn {
     display: inline-block;
@@ -118,21 +93,6 @@ strong {
     color: #56789A;
     text-decoration: none;
     font-weight: bold;
-}
-
-.contact-btn {
-    background-color: #333;
-    color: #fff;
-    padding: 12px 25px;
-    font-size: 1.1rem;
-    border-radius: 5px;
-    text-decoration: none;
-    margin-top: 20px;
-    display: inline-block;
-}
-
-.contact-btn:hover {
-    background-color: #555;
 }
 
 /* Responsive Design */
@@ -152,31 +112,6 @@ strong {
     #about h2 {
         font-size: 1.5rem;
     }
-
-    .title {
-        font-size: 1.2rem;
-    }
-
-    blockquote {
-        font-size: 1rem;
-    }
-
-    #about p {
-        font-size: 1rem;
-    }
-
-    .list-one h3, .list-two h3 {
-        font-size: 1.2rem;
-    }
-
-    .cta h3 {
-        font-size: 1.2rem;
-    }
-
-    .contact-btn {
-        padding: 10px 20px;
-        font-size: 1rem;
-    }
 }
 </style>
 <!DOCTYPE html>
@@ -190,9 +125,10 @@ strong {
     <meta name="author" content="Rick Clement">
 </head>
 <body>
+        <div class="services-header"></div>
     <section id="about">
         <div class="container">
-         <h2>Organisations</h2><br><br>
+         <h1>Organisational Consulting</h1><br><br>
             <div class="list-one">
              <h3>Market Research</h3> 
               <p>Leverage the power of psychology to understand your customers 
@@ -200,10 +136,10 @@ strong {
                  strategies, product development, and drive customer engagement.<br>
                  We offer services like :</p>
                 <ul>
-                    <li>• Customer Segmentation & Psychographic Profiling</li>
-                    <li>• Market Research & Consumer Behavior Analysis</li>
-                    <li>• Advertising Effectiveness Testing & Messaging Optimization</li>
-                    <li>• Consumer psychology consulting</li>
+                    <li> Customer Segmentation & Psychographic Profiling</li>
+                    <li> Market Research & Consumer Behavior Analysis</li>
+                    <li> Advertising Effectiveness Testing & Messaging Optimization</li>
+                    <li> Consumer psychology consulting</li>
                 </ul>
             </div>
             <br><br>
@@ -213,10 +149,10 @@ strong {
                      goals, whether in your career or personal life. Our mentorship programs can help 
                     you with :</p>
                 <ul>
-                    <li>• Career Development & Goal Setting</li>
-                    <li>• Communication & Leadership Skills</li>
-                    <li>• Life Coaching & Personal Branding</li>
-                    <li>• Skill Development & Overcoming Challenges</li>
+                    <li> Career Development & Goal Setting</li>
+                    <li> Communication & Leadership Skills</li>
+                    <li> Life Coaching & Personal Branding</li>
+                    <li> Skill Development & Overcoming Challenges</li>
                 </ul>
             </div><br><br>
             <a href="https://appt.link/nu-perspective/consultation" class="cta-btn">Book a Consultation</a><br><br>
