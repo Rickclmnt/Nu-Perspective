@@ -1,0 +1,34 @@
+name: Optimize Site
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Minify HTML, CSS, and JavaScript
+        uses: ericcornelissen/minify-action@v2
+        with:
+          source: './'
+          output: './'
+
+      - name: Optimize Images
+        uses: calibre/image-actions@main
+        with:
+          compress: true
+          formats: webp, avif
+          quality: 80
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add .
+          git commit -m "Auto-optimized site files"
+          git push
