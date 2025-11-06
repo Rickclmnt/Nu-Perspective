@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Book a Consultation | NuPerspective</title>
-  <meta name="description" content="Book a professional therapy or coaching consultation securely through Paystack." />
+  <meta name="description" content="Choose your preferred NuPerspective session and make secure payments through Paystack." />
   <link rel="stylesheet" href="/styles.css" />
   <style>
     :root {
@@ -49,42 +49,40 @@
       color: var(--muted);
       margin-bottom: 2.5rem;
     }
-    form {
-      max-width: 400px;
+    .options {
+      display: grid;
+      gap: 1.5rem;
+      max-width: 500px;
       margin: 0 auto;
+    }
+    .option {
       background: white;
-      padding: 2rem;
+      padding: 1.5rem;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    label {
-      font-weight: 600;
-      display: block;
-      margin-bottom: 6px;
+    .option:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
     }
-    input, select {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 15px;
-      font-family: inherit;
+    .option h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
     }
-    input[readonly] {
-      background: #f5f5f5;
-      color: #555;
-      cursor: not-allowed;
+    .option p {
+      color: var(--muted);
+      margin-bottom: 1rem;
     }
     button {
-      width: 100%;
-      padding: 14px;
       background: var(--accent);
       color: #fff;
       border: none;
       border-radius: 8px;
-      font-size: 16px;
+      padding: 10px 16px;
       cursor: pointer;
+      font-size: 15px;
       transition: background 0.2s ease;
     }
     button:hover {
@@ -97,45 +95,43 @@
       text-align: center;
     }
   </style>
-    <!-- Google tag(gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GSN7HYDTMP"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-GSN7HYDTMP');
-    </script>
 </head>
 <body>
   <div class="container">
     <header>
       <div><strong>NuPerspective</strong></div>
+      <a href="/book-consultation.html" class="back">← Back to Consultation</a>
     </header>
 
     <main>
-      <h1>Book a Session</h1>
-      <p class="sub">Secure your session with a licensed therapist or coach. All payments are processed safely through Paystack.</p>
+      <h1>Select Your Session</h1>
+      <p class="sub">Choose the service you’d like to pay for. All payments are processed securely through Paystack.</p>
 
-      <form id="paymentForm">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" placeholder="Jane Doe" required>
+      <div class="options">
+        <div class="option">
+          <h2>Therapy Session</h2>
+          <p>₦20,000 per session</p>
+          <button onclick="startPayment('Therapy Session', 20000)">Pay Now</button>
+        </div>
+        <div class="option">
+          <h2>Coaching Session</h2>
+          <p>₦15,000 per session</p>
+          <button onclick="startPayment('Coaching Session', 15000)">Pay Now</button>
+        </div>
+        <div class="option">
+          <h2>Consultation</h2>
+          <p>₦10,000 per session</p>
+          <button onclick="startPayment('Consultation', 10000)">Pay Now</button>
+        </div>
+        <div class="option">
+          <h2>Corporate Services</h2>
+          <p>Contact Us</p>
+          <button onclick="window.location.href='mailto:NuPerspective@protonmail.com?subject=Corporate%20Services%20Discussion&body=Hi%20there!';">
+  Mail
+</button>
 
-        <label for="email">Email Address</label>
-        <input type="email" id="email" placeholder="you@example.com" required>
-
-        <label for="session">Session Type</label>
-        <select id="session" required>
-          <option value="Therapy Session" data-amount="20000">Therapy Session — ₦20,000</option>
-          <option value="Coaching Session" data-amount="15000">Coaching Session — ₦15,000</option>
-          <option value="Consultation" data-amount="10000">Consultation — ₦10,000</option>
-        </select>
-
-        <label for="amount">Amount (₦)</label>
-        <input type="number" id="amount" value="20000" readonly required>
-
-        <button type="submit">Proceed to Payment</button>
-      </form>
+        </div>
+      </div>
     </main>
 
     <footer>© <span id="year"></span> NuPerspective</footer>
@@ -144,46 +140,36 @@
   <!-- Paystack Integration -->
   <script src="https://js.paystack.co/v1/inline.js"></script>
   <script>
-    const paymentForm = document.getElementById('paymentForm');
-    const sessionSelect = document.getElementById('session');
-    const amountField = document.getElementById('amount');
+    function startPayment(sessionType, amount) {
+      const name = prompt("Enter your full name:");
+      const email = prompt("Enter your email address:");
 
-    // Update amount dynamically based on selection
-    sessionSelect.addEventListener('change', () => {
-      const selected = sessionSelect.options[sessionSelect.selectedIndex];
-      amountField.value = selected.dataset.amount;
-    });
+      if (!name || !email) {
+        alert("Name and email are required to continue.");
+        return;
+      }
 
-    paymentForm.addEventListener('submit', payWithPaystack, false);
-
-    function payWithPaystack(e) {
-      e.preventDefault();
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const session = sessionSelect.value;
-      const amount = parseInt(amountField.value, 10) * 100;
       const ref = 'NP-' + Math.floor((Math.random() * 1000000000) + 1);
 
       const handler = PaystackPop.setup({
         key: 'pk_test_your_public_key_here', // Replace with Paystack public key
         email,
-        amount,
+        amount: amount * 100,
         currency: 'NGN',
         ref,
         metadata: {
           custom_fields: [
             { display_name: "Full Name", variable_name: "full_name", value: name },
-            { display_name: "Session Type", variable_name: "session_type", value: session }
+            { display_name: "Session Type", variable_name: "session_type", value: sessionType }
           ]
         },
         callback: function(response) {
-          // Redirect to thank-you page with query params
           const params = new URLSearchParams({
             ref: response.reference,
             name,
             email,
-            session,
-            amount: amount / 100
+            session: sessionType,
+            amount
           });
           window.location.href = `/thank-you.html?${params.toString()}`;
         },
