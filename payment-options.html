@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Payment Options | NuPerspective</title>
+  <meta name="description" content="Explore the payment options available for NuPerspective sessions, including Paystack, bank transfer, and secure online payment methods." />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    :root {
+      --accent: #00597A;
+      --muted: #6b7280;
+      --bg: #F7FBFC;
+      --text: #072029;
+    }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+    a.back {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    a.back:hover { text-decoration: underline; }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      line-height: 1.3;
+    }
+    p.sub {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+    section {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+    }
+    ul {
+      padding-left: 1.2rem;
+      color: var(--muted);
+    }
+    li {
+      margin-bottom: 0.6rem;
+    }
+    .cta {
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .cta a {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 14px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+    .cta a:hover {
+      background: #00455f;
+    }
+    footer {
+      margin-top: 4rem;
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div><strong>NuPerspective</strong></div>
+      <a href="/book-consultation.html" class="back">← Back</a>
+    </header>
+
+    <main>
+      <h1>Payment Options</h1>
+      <p class="sub">We offer secure and flexible payment options to make it easy for you to complete your session booking.</p>
+
+      <section>
+        <h2>Online Payment (Paystack)</h2>
+        <p>Our primary payment method is <strong>Paystack</strong>, a trusted and secure platform that allows you to pay with your debit or credit card, bank account, or USSD. Once your payment is confirmed, your booking will be automatically registered.</p>
+      </section>
+
+      <section>
+        <h2>Gift or Sponsored Session</h2>
+        <p>You can also sponsor a session for someone else. Simply provide their name and email when completing payment or transfer details. We’ll notify them once the session is confirmed.</p>
+      </section>
+
+      <div class="cta">
+        <a href="/payment.html">Proceed to Online Payment</a>
+      </div>
+    </main>
+
+    <footer>© <span id="year"></span> NuPerspective</footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
