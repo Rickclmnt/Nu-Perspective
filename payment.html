@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Book a Consultation | NuPerspective</title>
+  <meta name="description" content="Book a professional therapy or coaching consultation securely through Paystack." />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    :root {
+      --accent: #00597A;
+      --muted: #6b7280;
+      --bg: #F7FBFC;
+      --text: #072029;
+    }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+    a.back {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    a.back:hover { text-decoration: underline; }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      line-height: 1.3;
+    }
+    p.sub {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+      font-family: inherit;
+    }
+    input[readonly] {
+      background: #f5f5f5;
+      color: #555;
+      cursor: not-allowed;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    button:hover {
+      background: #00455f;
+    }
+    footer {
+      margin-top: 4rem;
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+    <!-- Google tag(gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GSN7HYDTMP"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GSN7HYDTMP');
+    </script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div><strong>NuPerspective</strong></div>
+    </header>
+
+    <main>
+      <h1>Book a Session</h1>
+      <p class="sub">Secure your session with a licensed therapist or coach. All payments are processed safely through Paystack.</p>
+
+      <form id="paymentForm">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Jane Doe" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="you@example.com" required>
+
+        <label for="session">Session Type</label>
+        <select id="session" required>
+          <option value="Therapy Session" data-amount="20000">Therapy Session — ₦20,000</option>
+          <option value="Coaching Session" data-amount="15000">Coaching Session — ₦15,000</option>
+          <option value="Consultation" data-amount="10000">Consultation — ₦10,000</option>
+        </select>
+
+        <label for="amount">Amount (₦)</label>
+        <input type="number" id="amount" value="20000" readonly required>
+
+        <button type="submit">Proceed to Payment</button>
+      </form>
+    </main>
+
+    <footer>© <span id="year"></span> NuPerspective</footer>
+  </div>
+
+  <!-- Paystack Integration -->
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+  <script>
+    const paymentForm = document.getElementById('paymentForm');
+    const sessionSelect = document.getElementById('session');
+    const amountField = document.getElementById('amount');
+
+    // Update amount dynamically based on selection
+    sessionSelect.addEventListener('change', () => {
+      const selected = sessionSelect.options[sessionSelect.selectedIndex];
+      amountField.value = selected.dataset.amount;
+    });
+
+    paymentForm.addEventListener('submit', payWithPaystack, false);
+
+    function payWithPaystack(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const session = sessionSelect.value;
+      const amount = parseInt(amountField.value, 10) * 100;
+      const ref = 'NP-' + Math.floor((Math.random() * 1000000000) + 1);
+
+      const handler = PaystackPop.setup({
+        key: 'pk_test_your_public_key_here', // Replace with Paystack public key
+        email,
+        amount,
+        currency: 'NGN',
+        ref,
+        metadata: {
+          custom_fields: [
+            { display_name: "Full Name", variable_name: "full_name", value: name },
+            { display_name: "Session Type", variable_name: "session_type", value: session }
+          ]
+        },
+        callback: function(response) {
+          // Redirect to thank-you page with query params
+          const params = new URLSearchParams({
+            ref: response.reference,
+            name,
+            email,
+            session,
+            amount: amount / 100
+          });
+          window.location.href = `/thank-you.html?${params.toString()}`;
+        },
+        onClose: function() {
+          alert('Payment window closed.');
+        }
+      });
+      handler.openIframe();
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NuPerspective — Therapy, Coaching & Organizational Wellness</title>
+  <meta name="description" content="NuPerspective: evidence-informed therapy, coaching and organizational consulting to help individuals, couples, families and teams build resilience, clarity and balance. Book a consultation or explore resources." />
+  <meta name="keywords" content="therapy, counselling, couples therapy, family therapy, mental health, Nigeria, organizational consulting" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2300323A'/%3E%3Ctext x='50' y='57' font-size='42' font-family='Arial' fill='white' text-anchor='middle' %3EN%3C/text%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#00323A" />
+
+  <style>
+    :root{
+      --bg:#F7FBFC;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#00597A;
+      --accent-2:#009CB4;
+      --radius:14px;
+      --maxw:1100px;
+      --shadow:0 6px 20px rgba(6,15,24,0.06);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      background:linear-gradient(180deg,#f2fbfb 0%,var(--bg) 60%);
+      color:#072029;
+      line-height:1.7;
+      font-size:16px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    .container{max-width:var(--maxw);margin:0 auto;padding:40px 28px;}
+    header{
+      position:sticky;top:12px;z-index:50;
+      display:flex;align-items:center;justify-content:space-between;
+      background:white;padding:10px 16px;border-radius:12px;
+    }
+    .brand{display:flex;gap:12px;align-items:center;text-decoration:none;color:inherit}
+    .logo{
+      width:48px;height:48px;border-radius:10px;display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));color:white;font-weight:700;font-size:20px;
+      box-shadow:var(--shadow);
+    }
+    a{color:black;text-decoration: none;}
+    nav{display:flex;gap:20px;align-items:center}
+    nav a{color:#03393a;text-decoration:none;font-weight:600;padding:8px 10px;border-radius:8px;transition:background 0.2s}
+    nav a:hover{background:rgba(0,0,0,0.03)}
+    nav a.cta{background:var(--accent);color:white;padding:10px 14px;border-radius:8px}
+
+    /* Mobile */
+    .mobile-toggle{display:none;flex-direction:column;justify-content:space-between;width:24px;height:18px;background:none;border:none;cursor:pointer;z-index:1001}
+    .mobile-toggle .bar{height:2px;width:100%;background:var(--accent);border-radius:2px;transition:transform 0.3s ease,opacity 0.3s ease}
+    .mobile-toggle.active .bar:nth-child(1){transform:translateY(8px) rotate(45deg)}
+    .mobile-toggle.active .bar:nth-child(2){opacity:0}
+    .mobile-toggle.active .bar:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+    .mobile-menu{position:fixed;inset:0;background:rgba(255,255,255,0.96);backdrop-filter:blur(10px);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      opacity:0;pointer-events:none;transition:opacity 0.3s ease;z-index:1000}
+    .mobile-menu.active{opacity:1;pointer-events:auto}
+
+    .mobile-nav{display:flex;flex-direction:column;align-items:center;gap:1.8rem}
+    .mobile-nav a{font-size:1rem;color:#03393a;text-decoration:none;transition:color 0.3s ease,transform 0.3s ease}
+    .mobile-nav a:hover{color:var(--accent-2);transform:scale(1.05)}
+    .mobile-nav .cta{background:var(--accent);color:#fff;padding:0.6rem 1.4rem;border-radius:999px;margin-top:1rem}
+
+    .close-menu{position:absolute;top:22px;right:22px;background:none;border:none;font-size:2rem;color:var(--accent);cursor:pointer;z-index:1002;transition:transform 0.2s ease,opacity 0.2s ease}
+    .close-menu:hover{transform:rotate(90deg);opacity:0.7}
+
+    @media(max-width:768px){.desktop-nav{display:none}.mobile-toggle{display:flex}}
+
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:48px;
+      align-items:center;
+      margin:80px 0;
+    }
+    .hero-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.72));
+      border-radius:var(--radius);
+      padding:48px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(8px);
+    }
+    h1{font-size:34px;margin:0 0 16px;letter-spacing:-0.02em;line-height:1.25}
+    h2{font-size:28px;letter-spacing:-0.01em;margin-bottom:12px}
+    h3{font-size:18px}
+    p.lead{margin:0 0 22px;color:var(--muted);font-size:17px;line-height:1.6}
+    .kicker{display:inline-block;padding:6px 10px;background:rgba(0,122,120,0.08);color:var(--accent);border-radius:999px;font-weight:700;margin-bottom:10px;font-size:13px}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:10px;border:0;font-weight:700;cursor:pointer;font-size:15px;transition:all 0.2s}
+    .btn-primary{background:var(--accent);color:white;box-shadow:0 6px 18px rgba(0,122,120,0.18)}
+    .btn-primary:hover{background:#00928c}
+    .btn-ghost{background:transparent;border:1px solid rgba(6,15,24,0.08);color:#03393a}
+    .btn-ghost:hover{border-color:rgba(6,15,24,0.15)}
+    .hero-side{display:grid;gap:20px}
+
+    .card-mini{background:var(--card);padding:16px 18px;border-radius:12px;box-shadow:var(--shadow);display:flex;gap:12px;align-items:center}
+    .dot{width:12px;height:12px;border-radius:999px;background:var(--accent)}
+    .stat{font-weight:700;font-size:18px}
+
+    /* Sections */
+    .section{margin:100px 0}
+    .grid{display:grid;gap:20px}
+    .services-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
+
+    .service{background:var(--card);padding:24px;border-radius:14px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px;transition:transform 0.2s,box-shadow 0.2s}
+    .service:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(6,15,24,0.08)}
+    .service h3{margin:0;font-size:17px}
+    .service p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
+    .icon-slot{width:36px;height:36px;border-radius:8px;background:rgba(0,0,0,0.03);display:inline-block}
+
+    /* Process */
+    .process{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
+    .step{background:linear-gradient(180deg,#fff,#fbffff);padding:18px 16px;border-radius:12px;min-width:160px;box-shadow:var(--shadow);flex:1}
+
+    /* Testimonials */
+    .testimonials{display:grid;grid-template-columns:1fr 260px;gap:24px;align-items:center}
+    .t-list{background:linear-gradient(180deg,#ffffff,#f8ffff);padding:22px;border-radius:12px;box-shadow:var(--shadow);position:relative}
+    .testimonial{display:none;transition:opacity 0.3s ease}
+    .testimonial.active{display:block;opacity:1}
+    .t-author{margin-top:12px;font-weight:700}
+    .t-nav{display:flex;gap:10px;margin-top:18px}
+    .t-nav button{border:0;border-radius:8px;padding:8px 12px;background:var(--accent);color:white;cursor:pointer;font-weight:600;transition:background 0.2s}
+    .t-nav button:hover{background:#00928c}
+
+    /* Resources */
+    .resources{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+    .resource{background:var(--card);padding:20px;border-radius:12px;box-shadow:var(--shadow)}
+
+    /* Lead magnet */
+    .leadbar{display:flex;gap:18px;align-items:center;padding:18px;border-radius:14px;background:linear-gradient(90deg,#eafff9,#f7fffdf5);box-shadow:var(--shadow)}
+    input[type="email"]{padding:12px;border-radius:10px;border:1px solid rgba(6,15,24,0.08);width:100%;font-family:inherit}
+
+    /* Contact */
+    form.contact{display:grid;gap:14px;margin-top:16px}
+    input,textarea{padding:14px;border-radius:10px;border:1px solid rgba(6,15,24,0.08);font-family:inherit;font-size:15px}
+    textarea{min-height:120px;resize:vertical}
+    footer{margin-top:80px;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:14px}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;gap:40px}
+      .testimonials{grid-template-columns:1fr}
+      nav{display:none}
+      .mobile-toggle{display:inline-flex}
+    }
+    @media (max-width:560px){
+      .container{padding:24px}
+      .hero-card{padding:28px}
+      h1{font-size:26px}
+      .section{margin:80px 0}
+    }
+
+    .muted{color:var(--muted)}
+    .caps{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+    a.small{font-size:13px;color:var(--muted);text-decoration:none}
+    a.small:hover{text-decoration:underline}
+.hero-img{
+  background-image: url('plants.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 78vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  color: white;
+  position: relative;
+  text-align: center;
+  padding: 0 1rem;
+}
+.hero-img::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.21); /* subtle overlay */
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+}
+
+.hero-content h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin-bottom: 0.5rem;
+}
+
+.hero-content p {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  opacity: 0.9;
+  margin: 0;
+}
+  </style>
+    <!-- Google tag(gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GSN7HYDTMP"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GSN7HYDTMP');
+    </script>
+</head>
+<body>
+  <div class="container" id="top">
+    <header role="banner" aria-label="Top">
+      <a class="brand" href="#top">
+        <div class="logo" aria-hidden="true">Nu</div>
+        <div>
+          <div style="font-weight:800">NuPerspective</div>
+          <div style="font-size:12px;color:var(--muted)">Therapy • Coaching • Consulting</div>
+        </div>
+      </a>
+
+      <nav class="desktop-nav" role="navigation">
+        <a href="#services">Services</a>
+        <a href="#resources">Resources</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="cta">Book a Consult</a>
+      </nav>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-expanded="false" aria-controls="mobile-menu" title="Open menu">
+        <span>M☰NU</span>
+      </button>
+    </header>
+
+    <!-- Overlay -->
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <button class="close-menu" aria-label="Close menu">✕</button>
+      <nav class="mobile-nav" role="navigation">
+        <a href="#services">Services</a>
+        <a href="#resources">Resources</a><a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="cta">Book a Consultation</a>
+      </nav>
+    </div>
+
+    <!-- Main -->
+    <main><br>
+      <section class="hero-img">
+        <div class="hero-content">
+    <h1>Welcome to <br>nu perspective</h1><br><br><br>
+    <p>Our personalised mentorship services are designed to help you foster growth, resilience, and a balanced life.</p><br>
+    <button class="btn btn-primary" id="bookNow">Book a Consultation</button> 
+  </div>
+      </section>
+      
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero-card">
+          <span class="kicker">Trusted in-person & online</span>
+          <h1 id="hero-heading">Guiding you and your loved ones to clarity, balance & resilience</h1>
+          <p class="lead">NuPerspective combines evidence-informed therapy, coaching and organisational consulting to help individuals, couples and teams navigate change, heal, and perform better — with confidentiality and cultural awareness.</p>
+          <div style="margin-top:24px;display:flex;gap:16px;flex-wrap:wrap">
+            <div class="card-mini"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 56 56">
+  <path fill="currentColor" fill-rule="evenodd" d="M28 52C14.745 52 4 41.255 4 28S14.745 4 28 4s24 10.745 24 24s-10.745 24-24 24m10.788-32.07a1.714 1.714 0 0 0-2.425 0L25.43 30.867a1.716 1.716 0 0 1-2.425 0l-3.22-3.221a1.714 1.714 0 0 0-2.425 2.424l5.645 5.645c.67.67 1.755.67 2.425 0l13.359-13.359c.67-.67.67-1.755 0-2.424" />
+</svg>
+              <div>
+                <div class="stat">15+ years</div>
+                <div class="muted" style="font-size:13px">Collective experience</div>
+              </div>
+            </div>
+            <div class="card-mini"><svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24"><path fill="currentColor" d="M12 20.962q-3.013-.895-5.007-3.651Q5 14.554 5 11.1V5.692l7-2.615l7 2.615V11.1q0 3.454-1.993 6.21q-1.994 2.757-5.007 3.652Z"/></svg>
+              <div>
+                <div class="stat">Confidential</div>
+                <div class="muted" style="font-size:13px">Safe, professional care</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+          <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Book a Consultation</a>
+            <button class="btn btn-ghost" id="learnMore">See Services</button>
+          </div>
+
+      <!-- Services --><br><br>
+      <section id="services" class="section" aria-labelledby="services-heading">
+        <div>
+          <div class="caps">What we do</div>
+          <h2 id="services-heading">Services focused on outcomes</h2>
+          <div class="muted" style="font-size:15px;margin-top:4px">Individual therapy, couples & family, and organisational support tailored to your context.</div>
+        </div>
+
+        <div class="grid services-grid" style="margin-top:24px">
+          <article class="service">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div class="icon-slot"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="40" viewBox="0 0 1664 1664"><path fill="#000000" d="M832 0Q673 0 560.5 112.5T448 384t112.5 271.5T832 768t271.5-112.5T1216 384t-112.5-271.5T832 0zm0 896q112 0 227 22t224 69.5t193.5 114t136 162.5t51.5 208q0 75-57 133.5t-135 58.5H192q-78 0-135-58.5T0 1472q0-112 51.5-208t136-162.5t193.5-114T605 918t227-22z"/></svg></div>
+              <h3>Individual Therapy</h3>
+            </div>
+            <p>Evidence-based therapy for anxiety, depression, life transitions, grief, and stress management with culturally attuned practitioners.</p>
+            <div style="margin-top:auto"><a class="small" href="#contact">Learn about sessions →</a></div>
+          </article>
+
+          <article class="service">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div class="icon-slot"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="35" viewBox="0 0 56 56"><path fill="#000000" d="M38.723 28.549c4.417 0 8.217-3.944 8.217-9.08c0-5.074-3.82-8.833-8.217-8.833c-4.396 0-8.217 3.841-8.217 8.874c0 5.095 3.8 9.039 8.217 9.039m-23.645.473c3.821 0 7.15-3.452 7.15-7.91c0-4.416-3.35-7.683-7.15-7.683c-3.82 0-7.19 3.349-7.169 7.725c0 4.416 3.328 7.868 7.17 7.868M3.616 47.572h15.612c-2.136-3.102.473-9.347 4.89-12.757c-2.28-1.52-5.219-2.65-9.06-2.65C5.793 32.164 0 39.004 0 44.695c0 1.85 1.027 2.877 3.616 2.877m22.186 0h25.822c3.225 0 4.376-.925 4.376-2.733c0-5.3-6.636-12.613-17.297-12.613c-10.641 0-17.277 7.313-17.277 12.614c0 1.807 1.15 2.732 4.376 2.732"/></svg></div>
+              <h3>Couples & Family</h3>
+            </div>
+            <p>Practical, compassionate support to heal patterns, rebuild trust, and find sustainable ways of relating.</p>
+            <div style="margin-top:auto"><a class="small" href="#contact">Explore couples support →</a></div>
+          </article>
+
+          <article class="service">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div class="icon-slot"><svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 56 56"><path fill="#000000" d="M28 27.126c3.194 0 5.941-2.852 5.941-6.566c0-3.669-2.762-6.387-5.941-6.387s-5.942 2.778-5.942 6.417c0 3.684 2.748 6.536 5.942 6.536m-17.097.341c2.763 0 5.17-2.495 5.17-5.718c0-3.194-2.422-5.556-5.17-5.556c-2.763 0-5.199 2.421-5.184 5.585c0 3.194 2.406 5.69 5.184 5.69m34.194 0c2.778 0 5.184-2.495 5.184-5.689c0-3.164-2.421-5.585-5.184-5.585c-2.748 0-5.17 2.362-5.17 5.555c0 3.224 2.407 5.72 5.17 5.72M2.614 40.881h11.29c-1.545-2.243.341-6.759 3.535-9.225c-1.65-1.099-3.773-1.916-6.55-1.916C4.188 29.74 0 34.686 0 38.801c0 1.337.743 2.08 2.614 2.08m50.772 0c1.886 0 2.614-.743 2.614-2.08c0-4.115-4.189-9.061-10.888-9.061c-2.778 0-4.902.817-6.55 1.916c3.193 2.466 5.08 6.982 3.535 9.225Zm-34.73 0h18.672c2.332 0 3.164-.669 3.164-1.976c0-3.832-4.798-9.12-12.507-9.12c-7.694 0-12.492 5.288-12.492 9.12c0 1.307.832 1.976 3.164 1.976"/></svg></div>
+              <h3>Organisational Consulting</h3>
+            </div>
+            <p>Workshops, coaching and culture audits to improve wellbeing, performance and team cohesion in organizations.</p>
+            <div style="margin-top:auto"><a class="small" href="#contact">Request corporate support →</a></div>
+          </article>
+          <button class="btn btn-ghost"><a href="servicelist.html">Other Services →</a></button> 
+        </div><br><br>
+      </section>
+
+      <!-- Process -->
+      <section class="section" aria-labelledby="process-heading">
+        <h2 id="process-heading">How it works</h2>
+        <div class="muted" style="margin-bottom:12px">Simple, transparent steps so you know what to expect.</div>
+        <div class="process">
+          <div class="step"><div class="caps">Step 1</div><strong>Free consult</strong><div class="muted" style="font-size:13px">Short intake call to understand what you need. Just fill-in the <strong>contact form</strong> below, we'll reach you via email.</div></div>
+          <div class="step"><div class="caps">Step 2</div><strong>Assessment</strong><div class="muted" style="font-size:13px">Collaborative plan & recommended approach.</div></div>
+          <div class="step"><div class="caps">Step 3</div><strong>Sessions</strong><div class="muted" style="font-size:13px">Regular sessions, progress checks, tools & homework.</div></div>
+          <div class="step"><div class="caps">Step 4</div><strong>Sustain</strong><div class="muted" style="font-size:13px">Maintenance support and coaching for long-term gains.</div></div>
+        </div><br><br>
+      </section>
+      
+      <!--faq-->
+      <section class="section" aria-labelledby="process-heading">
+        <h2 id="faq">FAQ</h2>
+        <div class="step"><strong>Frequently asked questions</strong><div class="muted" style="font-size:13px">Have a question? See the most asked questions by our visitors.<br><a class="small" href="faq.html"><strong>Read here</strong> →</a></div></div><br><br>
+      </section>
+
+      <!-- Testimonials -->
+      <section class="section" aria-labelledby="testimonials-heading">
+        <h2 id="testimonials-heading">Client stories</h2>
+        <div class="muted" style="margin-bottom:12px">Real outcomes — names changed for privacy where requested.</div>
+
+        <div class="testimonials">
+          <div class="t-list" id="testList">
+            <article class="testimonial active">
+              <div style="font-style:italic">"Working with NuPerspective helped me find a language for my anxiety and practical steps to manage it — the change was immediate and lasting."</div>
+              <div class="t-author">— Aisha, 34</div>
+            </article>
+            <article class="testimonial">
+              <div style="font-style:italic">"Our couple sessions moved us from frequent fights to honest conversations. We're more present and understanding now."</div>
+              <div class="t-author">— Daniel & Emeka</div>
+            </article>
+            <article class="testimonial">
+              <div style="font-style:italic">"The organisational workshop boosted team morale and clarified roles — measurable improvements in productivity followed."</div>
+              <div class="t-author">— HR Lead, Tech Firm</div>
+            </article>
+
+            <div class="t-nav">
+              <button id="tPrev" aria-label="Previous testimonial">‹ Prev</button>
+              <button id="tNext" aria-label="Next testimonial">Next ›</button>
+            </div>
+          </div>
+        </div><br><br>
+      </section>
+
+      <!-- Resources -->
+      <section id="resources" class="section" aria-labelledby="resources-heading">
+        <h2 id="resources-heading">Resources & Insights</h2>
+        <div class="muted" style="margin-bottom:12px">Articles, tools, and guides to help you grow and heal between sessions.</div>
+
+        <div class="resources">
+          <article class="resource">
+            <h3>Managing Anxiety in Uncertain Times</h3>
+            <p class="muted">Learn practical grounding techniques and cognitive tools to reduce anxiety in daily life.</p>
+            <a class="small" href="resources/anxiety.html">Read article →</a>
+          </article>
+
+          <article class="resource">
+            <h3>Communication Styles in Relationships</h3>
+            <p class="muted">Understanding emotional triggers and improving communication for stronger bonds.</p>
+            <a class="small" href="resources/communication.html">Read article →</a>
+          </article>
+
+          <article class="resource">
+            <h3>Building Healthy Teams</h3>
+            <p class="muted">Psychological safety, empathy, and structure — the three pillars of effective collaboration.</p>
+            <a class="small" href="resources/teams.html">Read article →</a>
+          </article>
+        </div><br><br>
+      </section>
+
+      <!-- Contact --><br>
+      <section id="contact" class="section" aria-labelledby="contact-heading">
+        <h2 id="contact-heading">Get in touch</h2>
+        <p class="muted" style="margin-bottom:16px">Request a consultation, ask a question, or discuss a workshop.</p>
+
+<form class="contact" id="contactForm" action="https://formsubmit.co/NuPerspective@protonmail.com" method="POST">
+  <input type="text" name="name" placeholder="Your name" required />
+  <input type="email" name="email" placeholder="Your email" required />
+          <textarea name="message" placeholder="Your message" required></textarea>
+  <button class="btn btn-primary" type="submit">Send message</button>
+</form>
+      </section><br><br>
+
+<script>
+  const form = document.getElementById('contactForm');
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault(); // stop normal submission
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        alert('Message sent! We'll get back to you shortly');
+        form.reset(); // clear form
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      alert('Network error. Please check your connection.');
+    }
+  });
+</script>
+
+
+      
+      <!--payment-->
+      <section class="section" aria-labelledby="process-heading">
+        <div class="process">
+          <div class="step"><div class="caps">Payment options</div><a href="payment.html"><strong>We accept credit cards and bank transfers</strong> →</a></div></section>
+    </main>
+
+    <footer role="contentinfo">
+      <div>© <span id="year"></span> NuPerspective. All rights reserved.</div>
+      <div style="display:flex;gap:10px">
+        <a class="small" href="#">Privacy Policy</a>
+        <a class="small" href="#">Terms</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+  
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function(e) {
+        const target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 60, behavior: "smooth" });
+          if (mobileMenu.style.display === "block") mobileMenu.style.display = "none";
+        }
+      });
+    });
+
+    // Hero buttons
+    document.getElementById("bookNow").onclick = () => window.scrollTo({ top: document.querySelector("#contact").offsetTop - 60, behavior: "smooth" });
+    document.getElementById("learnMore").onclick = () => window.scrollTo({ top: document.querySelector("#services").offsetTop - 60, behavior: "smooth" });
+
+    // Testimonials carousel
+    const testimonials = document.querySelectorAll(".testimonial");
+    const nextBtn = document.getElementById("tNext");
+    const prevBtn = document.getElementById("tPrev");
+    let index = 0;
+
+    function showTestimonial(i) {
+      testimonials.forEach((t, idx) => t.classList.toggle("active", idx === i));
+    }
+
+    function next() {
+      index = (index + 1) % testimonials.length;
+      showTestimonial(index);
+    }
+
+    function prev() {
+      index = (index - 1 + testimonials.length) % testimonials.length;
+      showTestimonial(index);
+    }
+
+    nextBtn.addEventListener("click", next);
+    prevBtn.addEventListener("click", prev);
+    setInterval(next, 6000); // Auto-slide every 6s
+    
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const mobileToggle = document.getElementById("mobileToggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const closeBtn = document.querySelector(".close-menu");
+
+    function closeMenu() {
+      mobileToggle.classList.remove("active");
+      mobileToggle.setAttribute("aria-expanded", "false");
+      mobileMenu.classList.remove("active");
+      mobileMenu.hidden = true;
+      document.body.style.overflow = "auto";
+    }
+
+    mobileToggle.addEventListener("click", () => {
+      const expanded = mobileToggle.getAttribute("aria-expanded") === "true";
+      mobileToggle.setAttribute("aria-expanded", !expanded);
+      mobileToggle.classList.toggle("active");
+      mobileMenu.classList.toggle("active");
+      mobileMenu.hidden = expanded;
+      document.body.style.overflow = expanded ? "auto" : "hidden";
+    });
+
+    closeBtn.addEventListener("click", closeMenu);
+    document.querySelectorAll(".mobile-nav a").forEach(a => a.addEventListener("click", closeMenu));
+  </script>
+</body>
+</html>

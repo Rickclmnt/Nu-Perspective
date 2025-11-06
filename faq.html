@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Frequently asked questions</title>
+  <style>
+    :root{
+      --bg:#F7FBFC;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#00597A;
+      --accent-2:#009CB4;
+      --radius:14px;
+      --maxw:1100px;
+      --shadow:0 6px 20px rgba(6,15,24,0.06);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      background:linear-gradient(180deg,#f2fbfb 0%,var(--bg) 60%);
+      color:#072029;
+      line-height:1.7;
+      font-size:16px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    .container{max-width:var(--maxw);margin:0 auto;padding:40px 28px;}
+    header{
+      position:sticky;top:12px;z-index:50;
+      display:flex;align-items:center;justify-content:space-between;
+      background:white;padding:10px 16px;border-radius:12px;
+    }
+    .brand{display:flex;gap:12px;align-items:center;text-decoration:none;color:inherit}
+    .logo{
+      width:48px;height:48px;border-radius:10px;display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));color:white;font-weight:700;font-size:20px;
+      box-shadow:var(--shadow);
+    }
+    a{color: white;text-decoration: none;}
+
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:48px;
+      align-items:center;
+      margin:80px 0;
+    }
+    .hero-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.72));
+      border-radius:var(--radius);
+      padding:48px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(8px);
+    }
+    h1{font-size:34px;margin:0 0 16px;letter-spacing:-0.02em;line-height:1.25}
+    h2{font-size:28px;letter-spacing:-0.01em;margin-bottom:12px}
+    h3{font-size:18px}
+    p.lead{margin:0 0 22px;color:var(--muted);font-size:17px;line-height:1.6}
+    .kicker{display:inline-block;padding:6px 10px;background:rgba(0,122,120,0.08);color:var(--accent);border-radius:999px;font-weight:700;margin-bottom:10px;font-size:13px}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:10px;border:0;font-weight:700;cursor:pointer;font-size:15px;transition:all 0.2s}
+    .btn-primary{background:var(--accent);color:white;box-shadow:0 6px 18px rgba(0,122,120,0.18)}
+    .btn-primary:hover{background:#00928c}
+    .btn-ghost{background:transparent;border:1px solid rgba(6,15,24,0.08);color:#03393a}
+    .btn-ghost:hover{border-color:rgba(6,15,24,0.15)}
+    .hero-side{display:grid;gap:20px}
+
+    .card-mini{background:var(--card);padding:16px 18px;border-radius:12px;box-shadow:var(--shadow);display:flex;gap:12px;align-items:center}
+    .dot{width:12px;height:12px;border-radius:999px;background:var(--accent)}
+    .stat{font-weight:700;font-size:18px}
+
+    /* Sections */
+    .section{margin:100px 0}
+    .grid{display:grid;gap:20px}
+    .services-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
+
+    .service{background:var(--card);padding:24px;border-radius:14px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px;transition:transform 0.2s,box-shadow 0.2s}
+    .service:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(6,15,24,0.08)}
+    .service h3{margin:0;font-size:17px}
+    .service p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
+    .icon-slot{width:36px;height:36px;border-radius:8px;background:rgba(0,0,0,0.03);display:inline-block}
+
+    /* Process */
+    .process{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}
+    .step{background:linear-gradient(180deg,#fff,#fbffff);padding:18px 16px;border-radius:12px;min-width:160px;box-shadow:var(--shadow);flex:1}
+
+    /* Testimonials */
+    .testimonials{display:grid;grid-template-columns:1fr 260px;gap:24px;align-items:center}
+    .t-list{background:linear-gradient(180deg,#ffffff,#f8ffff);padding:22px;border-radius:12px;box-shadow:var(--shadow);position:relative}
+    .testimonial{display:none;transition:opacity 0.3s ease}
+    .testimonial.active{display:block;opacity:1}
+    .t-author{margin-top:12px;font-weight:700}
+    .t-nav{display:flex;gap:10px;margin-top:18px}
+    .t-nav button{border:0;border-radius:8px;padding:8px 12px;background:var(--accent);color:white;cursor:pointer;font-weight:600;transition:background 0.2s}
+    .t-nav button:hover{background:#00928c}
+
+    /* Resources */
+    .resources{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+    .resource{background:var(--card);padding:20px;border-radius:12px;box-shadow:var(--shadow)}
+
+    /* Lead magnet */
+    .leadbar{display:flex;gap:18px;align-items:center;padding:18px;border-radius:14px;background:linear-gradient(90deg,#eafff9,#f7fffdf5);box-shadow:var(--shadow)}
+    input[type="email"]{padding:12px;border-radius:10px;border:1px solid rgba(6,15,24,0.08);width:100%;font-family:inherit}
+
+    /* Contact */
+    form.contact{display:grid;gap:14px;margin-top:16px}
+    input,textarea{padding:14px;border-radius:10px;border:1px solid rgba(6,15,24,0.08);font-family:inherit;font-size:15px}
+    textarea{min-height:120px;resize:vertical}
+    footer{margin-top:80px;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:14px}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;gap:40px}
+      .testimonials{grid-template-columns:1fr}
+      nav{display:none}
+      .mobile-toggle{display:inline-flex}
+    }
+    @media (max-width:560px){
+      .container{padding:24px}
+      .hero-card{padding:28px}
+      h1{font-size:26px}
+      .section{margin:80px 0}
+    }
+
+    .muted{color:var(--muted)}
+    .caps{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+  </style>
+    <!-- Google tag(gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GSN7HYDTMP"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GSN7HYDTMP');
+    </script>
+</head>
+
+<body>
+  <section class="section" aria-labelledby="process-heading">
+        <div class="process">
+          <div class="step"><div class="caps">Questions and answers:</div></div>
+          
+  <article class="service">
+  <div style="display:flex;align-items:center;gap:12px">
+    <h3>Q: How do I know if therapy is right for me?</h3>
+  </div>
+  <p><strong>Answer:</strong> Therapy is for anyone seeking clarity, growth, or support. Whether you’re facing specific challenges or just want to improve your well-being, the first step is to let someone know you want help.</p>
+</article>
+        
+  <article class="service">
+  <div style="display:flex;align-items:center;gap:12px">
+    <h3>Q: Who do you take on as clients?</h3>
+  </div>
+  <p><strong>Answer: </strong>We see anyone with problems that may have become difficult to manage without guidance. We understand that mental health is not limited by age. That's why our services are individually tailored to provide comprehensive care for individuals of all age groups; children, adolescents, adults, individuals, couples and families.</p>
+</article>
+        
+  <article class="service">
+  <div style="display:flex;align-items:center;gap:12px">
+    <h3>Q: How do we help?</h3>
+  </div>
+  <p><strong>Answer: </strong>We provide a safe, caring, and confidential environment to discuss your problems. We guide you and your family based on our extensive professional experience to develop long term coping strategies; we do not offer a ‘quick fix’ for problems, but personalized treatment plans delivered weekly for 8 to 16 weeks to address most issues.</p>
+</article>
+        
+  <article class="service">
+  <div style="display:flex;align-items:center;gap:12px">
+    <h3>Q: What can you help me with?</h3>
+  </div>
+  <p><strong>Answer: </strong>We help our clients resolve or manage thilike:
+<li>Family/Relationship Problems</li>
+<li>Addictions/Substance Abuse</li>
+<li>Anger Management</li>
+<li>Life Changes/Transitions</li>
+<li>Trauma</li>
+<li>Parenting Issues</li>
+<li>Postpartum Mood Disorders</li>
+<li>Career Planning & Guidance</li>
+<li>School Problems</li>
+<li>Depression</li>
+<li>Learning Disabilities</li>
+<li>Social Anxiety</li>
+<li>Phobias</li>
+<li>Identity</li>
+<li>Sleep Problems</li>
+<li>Self-Esteem</li>
+<li>Academic/Work Performance</li>
+<li>Psychological/Academic Testing</li>
+<li>Eating Disorders</li>
+<li>Attentional Problems</li>
+<li>Personal and Professional Growth</li>
+<li>Anxiety/Stress management</li>
+<li>Relationship Issues</li>
+<li>Problems at Work</li>
+<li>Grief and Loss</li>
+<li>Psychological and Neuropsychological Evaluation & Assessment</li>
+<li>Autism</li>
+<li>ADHD/ADD/Executive Functioning</li>
+<li>Dementia</li>
+<li>Traumatic Brain Injury</li>
+<li>Addictions/Recovery</li>
+<li>Time Management</li>
+<li>Social Skills Training</li>
+<li>Emotional Regulation</li>
+<li>Body Image Problems</li></p>
+</article>
+        
+  <article class="service">
+  <div style="display:flex;align-items:center;gap:12px">
+    <h3>Q: How do I book a session?</h3>
+  </div>
+  <p><strong>Answer: </strong>You can book a consultation online through our scheduling system, let's find a time that works for you.</p>
+  <a href="index.html#contact" class="btn btn-primary">Book a Consultation</a>
+</article>
+
+  </section>          
+</body>
+
+</html>
