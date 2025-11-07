@@ -88,6 +88,34 @@
     button:hover {
       background: #00455f;
     }
+    form.contact-form {
+      display: none;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      padding: 1.5rem;
+      margin-top: 1rem;
+    }
+    form.contact-form label {
+      display: block;
+      text-align: left;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+    }
+    form.contact-form input,
+    form.contact-form textarea {
+      width: 100%;
+      padding: 8px 10px;
+      margin-bottom: 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 14px;
+    }
+    form.contact-form button[type="submit"] {
+      background: var(--accent);
+      width: 100%;
+    }
     footer {
       margin-top: 4rem;
       font-size: 14px;
@@ -100,36 +128,45 @@
   <div class="container">
     <header>
       <div><strong>NuPerspective</strong></div>
-      <a href="javascript:history.back()" class="back">← Back</a>
+      <a href="/book-consultation.html" class="back">← Back</a>
     </header>
 
     <main>
-      <h1>Select Your Session</h1>
-      <p class="sub">Choose the service you’d like to pay for. All payments are processed securely through Paystack.</p>
+      <h1>Select Your Service</h1>
+      <p class="sub">Choose the service you’d like to book. All payments are processed securely through Paystack.</p>
 
       <div class="options">
+        <!-- In-Take Session -->
         <div class="option">
-          <h2>Therapy Session</h2>
-          <p>₦20,000 per session</p>
-          <button onclick="startPayment('Therapy Session', 20000)">Pay Now</button>
+          <h2>In-Take Session</h2>
+          <p>₦20,000</p>
+          <button onclick="startPayment('In-Take Session', 20000)">Pay Now</button>
         </div>
-        <div class="option">
-          <h2>Coaching Session</h2>
-          <p>₦15,000 per session</p>
-          <button onclick="startPayment('Coaching Session', 15000)">Pay Now</button>
-        </div>
-        <div class="option">
-          <h2>Consultation</h2>
-          <p>₦10,000 per session</p>
-          <button onclick="startPayment('Consultation', 10000)">Pay Now</button>
-        </div>
-        <div class="option">
-          <h2>Corporate Services</h2>
-          <p>Contact Us</p>
-          <button onclick="window.location.href='mailto:NuPerspective@protonmail.com?subject=Corporate%20Services%20Discussion&body=Hi%20there!';">
-  Mail
-</button>
 
+        <!-- Corporate Services -->
+        <div class="option" id="corporateOption">
+          <h2>Corporate Services</h2>
+          <p>Tailored solutions for teams, organizations, or partnerships.</p>
+          <button onclick="toggleContactForm()">Contact Us</button>
+
+          <!-- Contact Form -->
+          <form id="contactForm" class="contact-form" action="https://formsubmit.co/NuPerspective@protonmail.com" method="POST">
+            <label for="corpName">Full Name</label>
+            <input type="text" id="corpName" name="name" placeholder="Your full name" required>
+
+            <label for="corpEmail">Email</label>
+            <input type="email" id="corpEmail" name="email" placeholder="you@example.com" required>
+
+            <label for="corpMessage">Message</label>
+            <textarea id="corpMessage" name="message" rows="4" placeholder="Tell us a bit about your company or what you’re looking for..." required></textarea>
+
+            <input type="hidden" name="_subject" value="Corporate Services Inquiry" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="service" value="Corporate Services" />
+            <input type="hidden" name="_template" value="table" />
+
+            <button type="submit">Send Message</button>
+          </form>
         </div>
       </div>
     </main>
@@ -137,10 +174,28 @@
     <footer>© <span id="year"></span> NuPerspective</footer>
   </div>
 
+  <!-- Hidden Form for In-Take Session Notification -->
+  <form id="notifyForm" action="https://formsubmit.co/NuPerspective@protonmail.com" method="POST" style="display:none;">
+    <input type="hidden" name="name" id="formName" />
+    <input type="hidden" name="email" id="formEmail" />
+    <input type="hidden" name="service" id="formService" />
+    <input type="hidden" name="amount" id="formAmount" />
+    <input type="hidden" name="_subject" value="New NuPerspective In-Take Session Booking" />
+    <input type="hidden" name="_captcha" value="false" />
+    <input type="hidden" name="_template" value="table" />
+  </form>
+
   <!-- Paystack Integration -->
   <script src="https://js.paystack.co/v1/inline.js"></script>
   <script>
-    function startPayment(sessionType, amount) {
+    // Toggle visibility of Corporate Services contact form
+    function toggleContactForm() {
+      const form = document.getElementById("contactForm");
+      form.style.display = form.style.display === "block" ? "none" : "block";
+    }
+
+    // In-Take Session payment
+    function startPayment(serviceType, amount) {
       const name = prompt("Enter your full name:");
       const email = prompt("Enter your email address:");
 
@@ -149,10 +204,17 @@
         return;
       }
 
-      const ref = 'NP-' + Math.floor((Math.random() * 1000000000) + 1);
+      // Send info to FormSubmit
+      document.getElementById("formName").value = name;
+      document.getElementById("formEmail").value = email;
+      document.getElementById("formService").value = serviceType;
+      document.getElementById("formAmount").value = `₦${amount.toLocaleString()}`;
+      document.getElementById("notifyForm").submit();
 
+      // Continue to Paystack
+      const ref = 'NP-' + Math.floor((Math.random() * 1000000000) + 1);
       const handler = PaystackPop.setup({
-        key: 'pk_test_your_public_key_here', // Replace with Paystack public key
+        key: 'pk_test_your_public_key_here', // Replace with your Paystack public key
         email,
         amount: amount * 100,
         currency: 'NGN',
@@ -160,7 +222,7 @@
         metadata: {
           custom_fields: [
             { display_name: "Full Name", variable_name: "full_name", value: name },
-            { display_name: "Session Type", variable_name: "session_type", value: sessionType }
+            { display_name: "Service Type", variable_name: "service_type", value: serviceType }
           ]
         },
         callback: function(response) {
@@ -168,7 +230,7 @@
             ref: response.reference,
             name,
             email,
-            session: sessionType,
+            service: serviceType,
             amount
           });
           window.location.href = `/thank-you.html?${params.toString()}`;
