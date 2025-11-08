@@ -213,12 +213,21 @@
         return;
       }
 
-      // Send info to FormSubmit
-      document.getElementById("formName").value = name;
-      document.getElementById("formEmail").value = email;
-      document.getElementById("formService").value = serviceType;
-      document.getElementById("formAmount").value = `₦${amount.toLocaleString()}`;
-      document.getElementById("notifyForm").submit();
+      // Send info to FormSubmit asynchronously
+fetch("https://formsubmit.co/ajax/NuPerspective@protonmail.com", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    name,
+    email,
+    service: serviceType,
+    amount: `₦${amount.toLocaleString()}`,
+    _subject: "New NuPerspective In-Take Session Booking",
+    _captcha: "false",
+    _template: "table"
+  })
+}).catch(err => console.error("FormSubmit failed:", err));
+
 
       // Continue to Paystack
       const ref = 'NP-' + Math.floor((Math.random() * 1000000000) + 1);
